@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Green Flow System - Sustainable Industrial Paper Manufacturing{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 100px 0; position: relative;">
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; align-items: center;">
+        <div>
+            <span style="color: var(--secondary); text-transform: uppercase; font-weight: 700; font-size: 0.85rem; letter-spacing: 1.5px;">Eco-Friendly Paper Engineering</span>
+            <h1 style="color: white; font-size: 3rem; line-height: 1.15; margin: 15px 0 25px 0;">Sustainable & Durable Packaging Materials</h1>
+            <p style="font-size: 1.1rem; opacity: 0.9; margin-bottom: 35px; max-width: 500px;">From custom GSM Kraft rolls to high-resistance corrugated fluting, we supply industrial-grade paper tailored to packaging and distribution logistics.</p>
+            <div style="display: flex; gap: 15px;">
+                <a href="{% url 'core:request_quote' %}" class="btn btn-primary">Request Tonnage Quote</a>
+                <a href="{% url 'core:services' %}" class="btn btn-secondary">Browse Grades</a>
+            </div>
+        </div>
+        
+        <!-- Graphic Placeholder -->
+        <div style="background-color: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-md); padding: 50px; text-align: center; backdrop-filter: blur(10px);">
+            <div style="font-size: 5rem; margin-bottom: 20px;">📄🌳</div>
+            <h3 style="color: white; margin-bottom: 10px;">100% Recyclable Fiber</h3>
+            <p style="font-size: 0.9rem; opacity: 0.8;">Our factory operates under strict ISO 14001 guidelines to recycle pulp and reduce chemical footprints.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Products Section -->
+<section class="section">
+    <div class="container">
+        <div class="section-header">
+            <h2>Featured Paper Grades</h2>
+            <p>We manufacture premium structural materials to ensure mechanical strength and uniform printability.</p>
+        </div>
+        
+        <div class="products-grid">
+            <!-- Product Card 1 -->
+            <div class="product-card">
+                <div style="background-color: var(--primary); padding: 40px; text-align: center; font-size: 3rem;">📦</div>
+                <div class="product-body">
+                    <h3>Kraft Liner Board</h3>
+                    <p>High-strength wrapping paper engineered for heavy duty boxes, industrial sacks, and multi-wall packaging.</p>
+                    <div class="product-specs">
+                        <span>GSM: <strong>120 - 250 GSM</strong></span>
+                        <span>Burst: <strong>High BF</strong></span>
+                    </div>
+                    <a href="{% url 'core:request_quote' %}" class="btn btn-dark" style="text-align: center; margin-top: auto; padding: 10px;">Request Quote</a>
+                </div>
+            </div>
+            
+            <!-- Product Card 2 -->
+            <div class="product-card">
+                <div style="background-color: var(--primary-light); padding: 40px; text-align: center; font-size: 3rem;">📄</div>
+                <div class="product-body">
+                    <h3>Fluting Medium</h3>
+                    <p>Premium corrugating medium providing structural rigidity and compression strength in board packaging.</p>
+                    <div class="product-specs">
+                        <span>GSM: <strong>110 - 180 GSM</strong></span>
+                        <span>Source: <strong>Recycled Fiber</strong></span>
+                    </div>
+                    <a href="{% url 'core:request_quote' %}" class="btn btn-dark" style="text-align: center; margin-top: auto; padding: 10px;">Request Quote</a>
+                </div>
+            </div>
+            
+            <!-- Product Card 3 -->
+            <div class="product-card">
+                <div style="background-color: #27272a; padding: 40px; text-align: center; font-size: 3rem;">🗒️</div>
+                <div class="product-body">
+                    <h3>White-Back Duplex</h3>
+                    <p>Grey-back coated board, perfect for pharmaceutical packaging, cosmetic cartons, and retail print-heavy displays.</p>
+                    <div class="product-specs">
+                        <span>GSM: <strong>230 - 450 GSM</strong></span>
+                        <span>Finish: <strong>Gloss Coated</strong></span>
+                    </div>
+                    <a href="{% url 'core:request_quote' %}" class="btn btn-dark" style="text-align: center; margin-top: auto; padding: 10px;">Request Quote</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Highlights Section -->
+<section class="section" style="background-color: #f4f4f5; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
+    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: center;">
+        <div style="background: white; padding: 40px 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
+            <div style="font-size: 2rem; margin-bottom: 15px;">✓</div>
+            <h3 style="font-size: 1.15rem; margin-bottom: 10px;">ISO Certified</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">9001 and 14001 compliance guarantees manufacturing uniformity and standards.</p>
+        </div>
+        
+        <div style="background: white; padding: 40px 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
+            <div style="font-size: 2rem; margin-bottom: 15px;">🌳</div>
+            <h3 style="font-size: 1.15rem; margin-bottom: 10px;">FSC Sourced</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">All virgin fiber is responsibly logged from certified sustainable forests.</p>
+        </div>
+        
+        <div style="background: white; padding: 40px 20px; border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
+            <div style="font-size: 2rem; margin-bottom: 15px;">⚡</div>
+            <h3 style="font-size: 1.15rem; margin-bottom: 10px;">Fast Turnaround</h3>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Quotations compiled instantly and automated logistics dispatcher mapping.</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block title %}Our Products & Services - Green Core{% endblock %}
+
+{% block content %}
+<!-- Subheader Banner -->
+<section style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 60px 0; text-align: center;">
+    <div class="container">
+        <h1 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">Our Paper Grades & Products</h1>
+        <p style="opacity: 0.9; max-width: 600px; margin: 0 auto;">Browse through our high-strength industrial materials. Filter by category or search our complete catalog.</p>
+    </div>
+</section>
+
+<!-- Filter & Products Grid -->
+<section class="section">
+    <div class="container">
+        
+        <!-- Search & Filter Controls -->
+        <div style="background-color: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 20px; margin-bottom: 40px; display: flex; gap: 20px; flex-wrap: wrap; align-items: center; justify-content: space-between; box-shadow: var(--shadow-md);">
+            <div style="display: flex; gap: 10px; flex-grow: 1; max-width: 500px;">
+                <input type="text" id="search-input" placeholder="Search product name or description..." style="border: 1px solid var(--border-color); width: 100%; padding: 10px 15px; font-size: 0.95rem; border-radius: var(--radius-sm); outline: none;">
+            </div>
+            
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="btn btn-secondary active" style="padding: 8px 16px; font-size: 0.85rem; border-radius: var(--radius-sm); color: white; background-color: var(--secondary);">All Grades</button>
+                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem; border-radius: var(--radius-sm); color: var(--text-main); border: 1px solid var(--border-color);">Kraft Paper</button>
+                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem; border-radius: var(--radius-sm); color: var(--text-main); border: 1px solid var(--border-color);">Packaging</button>
+                <button class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem; border-radius: var(--radius-sm); color: var(--text-main); border: 1px solid var(--border-color);">Duplex Board</button>
+            </div>
+        </div>
+
+        <!-- Products Grid (Using Mock Cards for now. Later we will loop through the database) -->
+        <div class="products-grid">
+            
+            <!-- Card 1 -->
+            <div class="product-card">
+                <div style="background-color: var(--primary); padding: 40px; text-align: center; font-size: 3rem;">📄</div>
+                <div class="product-body">
+                    <span class="product-category" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--secondary); margin-bottom: 5px; display: block;">Kraft Paper</span>
+                    <h3>Brown Kraft Paper (Standard)</h3>
+                    <p>High tensile strength packaging paper, perfect for manufacturing bags, wrapping, and interleaving.</p>
+                    <div class="product-specs">
+                        <span>GSM: <strong>120 - 150</strong></span>
+                        <span>Availability: <strong>In Stock</strong></span>
+                    </div>
+                    <a href="{% url 'core:request_quote' %}" class="btn btn-dark" style="text-align: center; margin-top: auto; padding: 10px;">Request Quote</a>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="product-card">
+                <div style="background-color: var(--primary-light); padding: 40px; text-align: center; font-size: 3rem;">📄</div>
+                <div class="product-body">
+                    <span class="product-category" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--secondary); margin-bottom: 5px; display: block;">Kraft Paper</span>
+                    <h3>Ribbed Kraft Paper</h3>
+                    <p>Decorative ribbed finish used in gift packaging, envelopes, and specialty brand bag production.</p>
+                    <div class="product-specs">
+                        <span>GSM: <strong>70 - 100</strong></span>
+                        <span>Availability: <strong>In Stock</strong></span>
+                    </div>
+                    <a href="{% url 'core:request_quote' %}" class="btn btn-dark" style="text-align: center; margin-top: auto; padding: 10px;">Request Quote</a>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="product-card">
+                <div style="background-color: #27272a; padding: 40px; text-align: center; font-size: 3rem;">📦</div>
+                <div class="product-body">
+                    <span class="product-category" style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--secondary); margin-bottom: 5px; display: block;">Packaging</span>
+                    <h3>High-Performance Fluting</h3>
+                    <p>Heavy-duty recycled fluting medium designed for high-speed corrugators and extreme compression resistance.</p>
+                    <div class="product-specs">
+                        <span>GSM: <strong>110 - 140</strong></span>
+                        <span>Availability: <strong>In Stock</strong></span>
+                    </div>
+                    <a href="{% url 'core:request_quote' %}" class="btn btn-dark" style="text-align: center; margin-top: auto; padding: 10px;">Request Quote</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
