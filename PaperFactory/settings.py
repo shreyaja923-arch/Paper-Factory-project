@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3c-h*l++z)0#qo#8&+t92j8*-mu19orx_+p^!m65d!!+4ewldr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -131,3 +132,6 @@ LOGOUT_REDIRECT_URL = 'core:home'
 # Media Files Upload (Product images, blueprints, etc.)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Static files production compilation target folder
+STATIC_ROOT = BASE_DIR / 'staticfiles'

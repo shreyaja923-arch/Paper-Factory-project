@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block body_class %}dashboard-body{% endblock %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    
+    <!-- 1. Left Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="{% url 'core:home' %}" class="logo">
+                <img src="{% static 'images/logo.jpg' %}" alt="Green Core Logo" class="logo-img">
+                <span>Green</span>Core
+            </a>
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="{% url 'dashboard:home' %}" class="sidebar-item">
+                📊 Dashboard Home
+            </a>
+            <a href="{% url 'dashboard:manage_products' %}" class="sidebar-item active">
+                📦 Manage Catalog
+            </a>
+            <a href="{% url 'core:home' %}" class="sidebar-item">
+                🏠 Public Website
+            </a>
+            
+            <div class="sidebar-divider"></div>
+            
+            <form action="{% url 'logout' %}" method="post" class="sidebar-footer" style="padding: 0; border: none; background: none;">
+                {% csrf_token %}
+                <button type="submit" class="sidebar-item" style="width: 100%; border: none; background: none; text-align: left; cursor: pointer; font-family: inherit;">
+                    🚪 Logout Staff
+                </button>
+            </form>
+        </div>
+        
+        <div class="sidebar-footer">
+            <p>Logged in as:</p>
+            <strong>{{ user.username }}</strong>
+        </div>
+    </aside>
+    
+    <!-- 2. Main Panel -->
+    <main class="main-content">
+        
+        <!-- Top Navigation -->
+        <header class="topbar">
+            <div class="topbar-title">
+                <h1>{{ action_name }}</h1>
+            </div>
+            
+            <div class="user-profile">
+                <div class="avatar">
+                    {{ user.username|slice:":1"|upper }}
+                </div>
+                <span>{{ user.username }}</span>
+            </div>
+        </header>
+        
+        <!-- Page Content -->
+        <div class="dashboard-content">
+            
+            <!-- Back navigation link -->
+            <a href="{% url 'dashboard:manage_products' %}" class="back-link" style="margin-bottom: 30px;">&larr; Back to Catalog Management</a>
+            
+            <!-- Form Card Wrapper -->
+            <div class="form-card" style="margin: 0 auto; max-width: 650px;">
+                <h3 style="border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-bottom: 25px; color: var(--primary);">
+                    📋 Product Grade Specifications
+                </h3>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label class="form-label">Product Name *</label>
+                        {{ form.name }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Category *</label>
+                        {{ form.category }}
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Description *</label>
+                        {{ form.description }}
+                    </div>
+                    
+                    <div class="form-row-2">
+                        <div class="form-group">
+                            <label class="form-label">Weight Classification (GSM) *</label>
+                            {{ form.gsm }}
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Deckle Size / Width *</label>
+                            {{ form.size }}
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" style="display: flex; align-items: center; gap: 8px;">
+                        {{ form.availability }}
+                        <label class="form-label" style="margin-bottom: 0; text-transform: none; font-weight: 500; cursor: pointer;">
+                            Display this product grade in the public catalog and quotation form.
+                        </label>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div style="display: flex; gap: 15px; margin-top: 30px;">
+                        <button type="submit" class="btn btn-primary" style="flex-grow: 1;">{{ action_name }}</button>
+                        <a href="{% url 'dashboard:manage_products' %}" class="btn btn-secondary" style="text-decoration: none; padding: 12px 24px;">Cancel</a>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </main>
+</div>
+{% endblock %}

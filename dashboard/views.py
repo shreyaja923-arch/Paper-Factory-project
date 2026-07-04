@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from quotes.models import Quote
 from orders.models import Order
+from core.models import Product
+from core.forms import ProductForm
 
 @login_required
 def dashboard_home(request):
@@ -64,3 +66,86 @@ def advance_order(request, order_id):
         
     order.save()
     return redirect('dashboard:home')
+
+@login_required
+def manage_products(request):
+    products = Product.objects.all().order_by('name')
+    return render(request, 'dashboard/manage_products.html', {
+        'title': 'Manage Products - Green Core',
+        'products': products
+    })
+
+@login_required
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "New product grade added to the catalog successfully.")
+            return redirect('dashboard:manage_products')
+    else:
+        form = ProductForm()
+        
+    return render(request, 'dashboard/product_form.html', {
+        'title': 'Add New Product - Green Core',
+        'form': form,
+        'action_name': 'Add New Product'
+    })
+
+@login_required
+def edit_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f"Product '{product.name}' specifications updated successfully.")
+            return redirect('dashboard:manage_products')
+    else:
+        form = ProductForm(instance=product)
+        
+    return render(request, 'dashboard/product_form.html', {
+        'title': f"Edit Product: {product.name} - Green Core",
+        'form': form,
+        'action_name': 'Update Specifications',
+        'product': product
+    })
+
+@login_required
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    product_name = product.name
+    product.delete()
+    messages.warning(request, f"Product '{product_name}' has been deleted from the catalog.")
+    return redirect('dashboard:manage_products')
+@login_required
+def dashboard_home(request):
+    # 1. Calculate statistics for metrics cards
+    total_quotes = Quote.objects.count()
+    pending_quotes = Quote.objects.filter(status='PENDING').count()
+    active_orders = Order.objects.exclude(stage='DELIVERED').count()
+    
+    # 2. Fetch items for lists
+    quotes = Quote.objects.all().order_by('-created_at')
+    orders = Order.objects.all().order_by('-created_at')
+    
+    # 3. Calculate order stage distribution counts for Chart.js
+    stage_received = Order.objects.filter(stage='RECEIVED').count()
+    stage_production = Order.objects.filter(stage='PRODUCTION').count()
+    stage_dispatched = Order.objects.filter(stage='DISPATCHED').count()
+    stage_delivered = Order.objects.filter(stage='DELIVERED').count()
+    
+    return render(request, 'dashboard/dashboard.html', {
+        'title': 'Admin Dashboard - Green Core Factory Systems',
+        'total_quotes': total_quotes,
+        'pending_quotes': pending_quotes,
+        'active_orders': active_orders,
+        'quotes': quotes,
+        'orders': orders,
+        
+        # Pass counts to context
+        'stage_received': stage_received,
+        'stage_production': stage_production,
+        'stage_dispatched': stage_dispatched,
+        'stage_delivered': stage_delivered,
+    })

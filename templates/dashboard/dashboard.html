@@ -30,6 +30,9 @@
             <a href="{% url 'dashboard:home' %}" class="sidebar-item active">
                 📊 Dashboard Home
             </a>
+            <a href="{% url 'dashboard:manage_products' %}" class="sidebar-item">
+                📦 Manage Catalog
+            </a>
             <a href="{% url 'core:home' %}" class="sidebar-item">
                 🏠 Public Website
             </a>
@@ -224,4 +227,59 @@
         </div>
     </main>
 </div>
+<!-- Load Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById('pipelineChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Received', 'Production', 'Dispatched', 'Delivered'],
+                datasets: [{
+                    label: 'Orders',
+                    data: [
+                        {{ stage_received }},
+                        {{ stage_production }},
+                        {{ stage_dispatched }},
+                        {{ stage_delivered }}
+                    ],
+                    backgroundColor: [
+                        'rgba(251, 191, 36, 0.15)',  // Orange/Received
+                        'rgba(59, 130, 246, 0.15)',   // Blue/Production
+                        'rgba(52, 211, 153, 0.15)',   // Green/Dispatched
+                        'rgba(148, 163, 184, 0.15)'   // Grey/Delivered
+                    ],
+                    borderColor: [
+                        '#fbbf24',
+                        '#3b82f6',
+                        '#34d399',
+                        '#cbd5e1'
+                    ],
+                    borderWidth: 2,
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { stepSize: 1, color: '#94a3b8' },
+                        grid: { color: '#1e293b' }
+                    },
+                    x: {
+                        ticks: { color: '#94a3b8' },
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+    });
+</script>
 {% endblock %}
