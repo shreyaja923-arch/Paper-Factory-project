@@ -1,89 +1,80 @@
 {% extends 'base.html' %}
 
-{% block title %}Request a Quotation - PaperFlow{% endblock %}
+{% block title %}Request a Quotation - Green Core{% endblock %}
 
 {% block content %}
-<!-- Subheader Banner -->
-<section style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 60px 0; text-align: center;">
+<!-- Subheader Banner (Clean dark styles) -->
+<section class="sub-banner">
     <div class="container">
-        <h1 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">Request a Custom Quotation</h1>
-        <p style="opacity: 0.9; max-width: 600px; margin: 0 auto;">Submit your technical requirements and tonnage details. Our sales office will compile a formal quote sheet instantly.</p>
+        <h1>Request a Custom Quotation</h1>
+        <p>Submit your technical requirements and tonnage details. Our sales office will compile a formal quote sheet instantly.</p>
     </div>
 </section>
 
-<!-- Quote Form -->
+<!-- Quote Form Container -->
 <section class="section">
-    <div class="container" style="max-width: 700px;">
-        <div style="background-color: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 40px; box-shadow: var(--shadow-md);">
-            
+    <div class="container">
+        
+        <!-- Sleek Dark Form Card -->
+        <div class="form-card">
             <form action="{% url 'core:request_quote' %}" method="post">
                 {% csrf_token %}
                 
                 <!-- Section 1: Customer Contact Details -->
-                <h3 style="font-size: 1.1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 8px; margin-bottom: 20px;">1. Company & Contact Details</h3>
+                <h3 style="border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-bottom: 25px; color: var(--primary);">1. Company & Contact Details</h3>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Contact Name *</label>
-                        <input type="text" name="name" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); outline: none;">
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label class="form-label">Contact Name *</label>
+                        {{ form.name }}
                     </div>
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Company Name *</label>
-                        <input type="text" name="company" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); outline: none;">
+                    <div class="form-group">
+                        <label class="form-label">Company Name *</label>
+                        {{ form.company }}
                     </div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Email Address *</label>
-                        <input type="email" name="email" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); outline: none;">
+                <div class="form-row-2">
+                    <div class="form-group">
+                        <label class="form-label">Email Address *</label>
+                        {{ form.email }}
                     </div>
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Phone Number *</label>
-                        <input type="text" name="phone" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); outline: none;">
+                    <div class="form-group">
+                        <label class="form-label">Phone Number *</label>
+                        {{ form.phone }}
                     </div>
                 </div>
 
                 <!-- Section 2: Material Specifications -->
-                <h3 style="font-size: 1.1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 8px; margin-bottom: 20px;">2. Material Requirements</h3>
+                <h3 style="border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-bottom: 25px; color: var(--primary);">2. Material Requirements</h3>
                 
-                <div style="display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; margin-bottom: 20px;">
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Paper Grade *</label>
-                        <select name="product" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); background: white; outline: none; font-family: inherit;">
-                            <option value="">-- Select Grade --</option>
-                            <option value="Brown Kraft Paper">Brown Kraft Paper (120-250 GSM)</option>
-                            <option value="Ribbed Kraft Paper">Ribbed Kraft Paper (70-100 GSM)</option>
-                            <option value="High-Performance Fluting">High-Performance Fluting (110-140 GSM)</option>
-                            <option value="Duplex Board">Grey-back Coated Duplex (230-350 GSM)</option>
-                        </select>
+                <div class="form-row-3">
+                    <div class="form-group">
+                        <label class="form-label">Paper Grade *</label>
+                        {{ form.product }}
                     </div>
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Quantity *</label>
-                        <input type="number" name="quantity" min="1" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); outline: none;">
+                    <div class="form-group">
+                        <label class="form-label">Quantity *</label>
+                        {{ form.quantity }}
                     </div>
-                    <div>
-                        <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Unit *</label>
-                        <select name="unit" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); background: white; outline: none; font-family: inherit;">
-                            <option value="MT">Metric Tons (MT)</option>
-                            <option value="Rolls">Rolls</option>
-                            <option value="Sheets">Sheets</option>
-                        </select>
+                    <div class="form-group">
+                        <label class="form-label">Unit *</label>
+                        {{ form.unit }}
                     </div>
                 </div>
 
                 <!-- Section 3: Delivery Address -->
-                <h3 style="font-size: 1.1rem; border-bottom: 2px solid var(--secondary); padding-bottom: 8px; margin-bottom: 20px;">3. Delivery Location</h3>
+                <h3 style="border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-bottom: 25px; color: var(--primary);">3. Delivery Location</h3>
                 
-                <div style="margin-bottom: 30px;">
-                    <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Delivery Address *</label>
-                    <input type="text" name="location" placeholder="e.g. Warehouse 3, Port Zone, City" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); outline: none;">
+                <div class="form-group">
+                    <label class="form-label">Delivery Address *</label>
+                    {{ form.location }}
                 </div>
                 
-                <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: var(--radius-sm); font-size: 1rem; padding: 14px;">Submit Quotation Request</button>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Quotation Request</button>
             </form>
-            
         </div>
+        
     </div>
 </section>
 {% endblock %}

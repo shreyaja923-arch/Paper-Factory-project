@@ -1,8 +1,10 @@
+{% load static %}
 <header class="header">
     <div class="container navbar">
         <!-- Logo linking to Home Page -->
         <a href="{% url 'core:home' %}" class="logo">
-            📦 Green<span>Core</span>
+            <img src="{% static 'images/logo.jpg' %}" alt="Green Core Logo" class="logo-img">
+            <span>Green</span>Core
         </a>
         
         <!-- Navigation Links -->
@@ -12,19 +14,15 @@
             <a href="{% url 'core:services' %}" class="nav-item">Products & Services</a>
             <a href="{% url 'core:contact' %}" class="nav-item">Contact</a>
             
-            <!-- Conditional view: displays Dashboard/Logout if logged in, otherwise Login -->
             {% if user.is_authenticated %}
                 <a href="{% url 'dashboard:home' %}" class="nav-item">Dashboard</a>
-                <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                <form action="{% url 'logout' %}" method="post" class="nav-form">
                     {% csrf_token %}
-                    <button type="submit" class="nav-item" style="background:none; border:none; cursor:pointer; font-family:inherit; font-size:inherit;">Logout</button>
+                    <button type="submit" class="nav-item nav-btn">Logout</button>
                 </form>
             {% else %}
-           
-
-               <a href="{% url 'login' %}" class="nav-item">Login</a>
+                <a href="{% url 'login' %}" class="nav-item">Login</a>
             {% endif %}
-            
             
             <a href="{% url 'core:request_quote' %}" class="btn btn-primary">Request Quote</a>
         </nav>

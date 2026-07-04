@@ -4,53 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PaperFlow: High-quality industrial paper manufacturing and logistics.">
-    <title>{% block title %}{{ title|default:"PaperFlow" }}{% endblock %}</title>
-    <!-- Custom Style Sheet -->
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+    
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
 
-    <!-- Include Navbar -->
-    {% include 'includes/navbar.html' %}
-
-    <!-- Message Alerts (Toasts) -->
+    <!-- Django Success/Error Messages Pop-up -->
     {% if messages %}
-    <div class="messages-container">
-        {% for message in messages %}
-        <div class="alert alert-{{ message.tags }}">
-            {{ message }}
+        <div class="messages-container">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
     {% endif %}
+    
+    {% block navbar %}
+        {% include 'includes/navbar.html' %}
+    {% endblock %}
 
-    <!-- Main Content Block -->
-    <main style="flex-grow: 1;">
+    <main>
         {% block content %}
         {% endblock %}
     </main>
 
-    <!-- Include Footer -->
-    {% include 'includes/footer.html' %}
+    
+    {% block footer %}
+        {% include 'includes/footer.html' %}
+    {% endblock %}
 
-    <!-- Core Scripts -->
+   
     <script src="{% static 'js/main.js' %}"></script>
-    <script>
-        // Auto-dismiss alert boxes after 4 seconds
-        document.addEventListener('DOMContentLoaded', () => {
-            const alerts = document.querySelectorAll('.alert');
-            alerts.forEach(alert => {
-                setTimeout(() => {
-                    alert.style.opacity = '0';
-                    alert.style.transform = 'translateX(100px)';
-                    alert.style.transition = 'all 0.5s ease';
-                    setTimeout(() => alert.remove(), 500);
-                }, 4000);
-            });
-        });
-    </script>
-    {% block extra_js %}{% endblock %}
 </body>
 </html>

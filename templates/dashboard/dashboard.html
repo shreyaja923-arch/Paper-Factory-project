@@ -1,0 +1,227 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Factory Dashboard - Green Core{% endblock %}
+
+{% block extra_css %}
+<!-- Dashboard-specific styles -->
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block body_class %}dashboard-body{% endblock %}
+
+<!-- Override public navbar & footer to hide them on the dashboard -->
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block content %}
+<div class="dashboard-wrapper">
+    
+    <!-- 1. Left Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="sidebar-header">
+            <a href="{% url 'core:home' %}" class="logo">
+                <img src="{% static 'images/logo.jpg' %}" alt="Green Core Logo" class="logo-img">
+                <span>Green</span>Core
+            </a>
+        </div>
+        
+        <div class="sidebar-menu">
+            <a href="{% url 'dashboard:home' %}" class="sidebar-item active">
+                📊 Dashboard Home
+            </a>
+            <a href="{% url 'core:home' %}" class="sidebar-item">
+                🏠 Public Website
+            </a>
+            
+            <div class="sidebar-divider"></div>
+            
+            <!-- Logout Action -->
+            <form action="{% url 'logout' %}" method="post" class="sidebar-footer" style="padding: 0; border: none; background: none;">
+                {% csrf_token %}
+                <button type="submit" class="sidebar-item" style="width: 100%; border: none; background: none; text-align: left; cursor: pointer; font-family: inherit;">
+                    🚪 Logout Staff
+                </button>
+            </form>
+        </div>
+        
+        <div class="sidebar-footer">
+            <p>Logged in as:</p>
+            <strong>{{ user.username }}</strong>
+        </div>
+    </aside>
+    
+    <!-- 2. Main Work Panel -->
+    <main class="main-content">
+        
+        <!-- Top bar profile details -->
+        <header class="topbar">
+            <div class="topbar-title">
+                <h1>Factory Management System</h1>
+            </div>
+            
+            <div class="user-profile">
+                <div class="avatar">
+                    {{ user.username|slice:":1"|upper }}
+                </div>
+                <span>{{ user.username }}</span>
+            </div>
+        </header>
+        
+        <!-- Dashboard Content Body -->
+        <div class="dashboard-content">
+            
+            <!-- Statistics metrics row -->
+            <div class="stats-grid">
+                <!-- Card 1: Total Quotes -->
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Total Quotes</h3>
+                        <div class="stat-number">{{ total_quotes }}</div>
+                    </div>
+                    <div class="stat-icon icon-blue">📋</div>
+                </div>
+                
+                <!-- Card 2: Pending Quotes -->
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Pending Review</h3>
+                        <div class="stat-number">{{ pending_quotes }}</div>
+                    </div>
+                    <div class="stat-icon icon-orange">⏳</div>
+                </div>
+                
+                <!-- Card 3: Active Production Orders -->
+                <div class="stat-card">
+                    <div class="stat-info">
+                        <h3>Active Orders</h3>
+                        <div class="stat-number">{{ active_orders }}</div>
+                    </div>
+                    <div class="stat-icon icon-green">⚙️</div>
+                </div>
+            </div>
+            
+            <!-- Double Columns: Tables and Pipelines -->
+            <div class="dashboard-columns">
+                
+                <!-- Left Column: Quotation Requests table -->
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h2>Recent Quotation Requests</h2>
+                    </div>
+                    
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Quote ID</th>
+                                        <th>Company / Contact</th>
+                                        <th>Material Specs</th>
+                                        <th>Tonnage</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for quote in quotes %}
+                                        <tr>
+                                            <td>#{{ quote.id }}</td>
+                                            <td>
+                                                <strong>{{ quote.company }}</strong>
+                                                <span class="table-subtext">{{ quote.name }} | {{ quote.phone }}</span>
+                                            </td>
+                                            <td>
+                                                {{ quote.product.name }}
+                                                <span class="table-subtext">{{ quote.location }}</span>
+                                            </td>
+                                            <td>{{ quote.quantity }} {{ quote.unit }}</td>
+                                            <td>
+                                                {% if quote.status == 'PENDING' %}
+                                                    <span class="badge badge-pending">Pending Review</span>
+                                                {% elif quote.status == 'APPROVED' %}
+                                                    <span class="badge badge-approved">Approved</span>
+                                                {% elif quote.status == 'REJECTED' %}
+                                                    <span class="badge badge-rejected">Rejected</span>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if quote.status == 'PENDING' %}
+                                                    <div style="display: flex; gap: 8px;">
+                                                        <a href="{% url 'dashboard:approve_quote' quote.id %}" class="btn-db-action" style="text-decoration: none; padding: 6px 12px; font-size: 0.8rem;">Approve</a>
+                                                        <a href="{% url 'dashboard:reject_quote' quote.id %}" class="btn-db-reject" style="text-decoration: none; padding: 6px 12px; font-size: 0.8rem;">Reject</a>
+                                                    </div>
+                                                {% else %}
+                                                    <span class="table-subtext">Completed</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% empty %}
+                                        <tr>
+                                            <td colspan="6" style="text-align: center; color: var(--text-muted); padding: 30px 0;">No quotations submitted yet.</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column: Active Production Pipeline list -->
+                <div class="panel-card">
+                    <div class="panel-header">
+                        <h2>Production Pipeline</h2>
+                    </div>
+                    
+                    <div class="panel-body">
+                        {% for order in orders %}
+                            <div style="border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                                    <strong>{{ order.quote.company }}</strong>
+                                    {% if order.stage == 'RECEIVED' %}
+                                        <span class="badge badge-pending">Received</span>
+                                    {% elif order.stage == 'PRODUCTION' %}
+                                        <span class="badge badge-contacted">In Production</span>
+                                    {% elif order.stage == 'DISPATCHED' %}
+                                        <span class="badge badge-approved">Dispatched</span>
+                                    {% elif order.stage == 'DELIVERED' %}
+                                        <span class="badge badge-completed">Delivered</span>
+                                    {% endif %}
+                                </div>
+                                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">
+                                    Grade: {{ order.quote.product.name }} <br>
+                                    Volume: {{ order.quote.quantity }} {{ order.quote.unit }}
+                                </p>
+                                
+                                {% if order.tracking_number %}
+                                    <p style="font-size: 0.8rem; color: var(--db-secondary); margin-bottom: 10px; font-family: monospace;">
+                                        🚚 Tracking: {{ order.tracking_number }}
+                                    </p>
+                                {% endif %}
+                                
+                                {% if order.stage != 'DELIVERED' %}
+                                    <a href="{% url 'dashboard:advance_order' order.id %}" class="btn-db-action" style="text-decoration: none; display: inline-block; font-size: 0.8rem; padding: 6px 12px; text-align: center; width: 100%;">
+                                        {% if order.stage == 'RECEIVED' %}
+                                            🏭 Start Manufacturing
+                                        {% elif order.stage == 'PRODUCTION' %}
+                                            📦 Dispatch Cargo
+                                        {% elif order.stage == 'DISPATCHED' %}
+                                            ✅ Mark as Delivered
+                                        {% endif %}
+                                    </a>
+                                {% else %}
+                                    <span class="table-subtext" style="display: block; text-align: center; font-weight: bold; color: var(--text-muted);">🎉 Order Completed</span>
+                                {% endif %}
+                            </div>
+                        {% empty %}
+                            <p style="text-align: center; color: var(--text-muted); padding: 30px 0;">No active manufacturing orders at this time.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+    </main>
+</div>
+{% endblock %}

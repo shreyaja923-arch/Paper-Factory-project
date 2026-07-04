@@ -1,59 +1,52 @@
 {% extends 'base.html' %}
 
-{% block title %}Contact Factory - Green Core{% endblock %}
+{% block title %}Contact - Green Core{% endblock %}
 
 {% block content %}
-<!-- Subheader Banner -->
-<section style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 60px 0; text-align: center;">
+<!-- Subheader Banner (No inline styles) -->
+<section class="sub-banner">
     <div class="container">
-        <h1 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">Contact Our Sales Office</h1>
-        <p style="opacity: 0.9; max-width: 600px; margin: 0 auto;">Have a query about custom sizes, deckles, or wholesale distribution? Send us a message.</p>
+        <h1>Contact Our Sales Office</h1>
+        <p>Have a query about custom sizes, deckles, or wholesale distribution? Send us a message.</p>
     </div>
 </section>
-
-<!-- Contact Form Section -->
+<!-- Contact Section -->
 <section class="section">
-    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px;">
+    <div class="container grid-2">
         
-        <!-- Left: Contact Details -->
+        <!-- Left Column: Minimal Contact Details -->
         <div>
-            <h2 style="margin-bottom: 20px;">Get in Touch</h2>
-            <p style="color: var(--text-muted); margin-bottom: 30px; line-height: 1.7;">Our plant sales representatives are available Monday through Saturday. Fill out the contact form and we will get back to you with specs and delivery times.</p>
+            <h2>Get in Touch</h2>
+            <p>Our plant sales representatives are available Monday through Saturday. Fill out the contact form and we will get back to you with specs and delivery times.</p>
             
-            <div style="display: flex; flex-direction: column; gap: 20px;">
-                <div>
-                    <strong>📍 Plant Location:</strong>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 5px;">104 Industrial Area Phase 2, Delhi NCR</p>
-                </div>
-                <div>
-                    <strong>📞 Sales Phone:</strong>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 5px;">+1 (800) 555-FLOW</p>
-                </div>
-                <div>
-                    <strong>✉️ Email Address:</strong>
-                    <p style="color: var(--text-muted); font-size: 0.95rem; margin-top: 5px;">sales@paperflow.com</p>
-                </div>
-            </div>
+            <!-- List of details (styled via stylesheet lists) -->
+            <ul class="footer-links-list">
+                <li>📍 104 Industrial Area Phase 2, Delhi NCR</li>
+                <li>📞 +1 (800) 555-FLOW</li>
+                <li>✉️ sales@greencore-paper.com</li>
+            </ul>
         </div>
-        
-        <!-- Right: Contact Form -->
-        <div style="background-color: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 40px; box-shadow: var(--shadow-md);">
+                <!-- Right Column: Minimalist Dark Form Card -->
+        <div class="form-card">
             <form action="{% url 'core:contact' %}" method="post">
                 {% csrf_token %}
-                <div style="margin-bottom: 20px;">
-                    <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Your Name</label>
-                    <input type="text" name="name" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); outline: none;">
-                </div>
-                <div style="margin-bottom: 20px;">
-                    <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Email Address</label>
-                    <input type="email" name="email" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); outline: none;">
-                </div>
-                <div style="margin-bottom: 20px;">
-                    <label style="display: block; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px; text-transform: uppercase;">Your Message</label>
-                    <textarea name="message" rows="5" required style="border: 1px solid var(--border-color); width: 100%; padding: 10px; border-radius: var(--radius-sm); outline: none; font-family: inherit; resize: none;"></textarea>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Name</label>
+                    {{ form.name }}
                 </div>
                 
-                <button type="submit" class="btn btn-primary" style="width: 100%; border-radius: var(--radius-sm);">Send Message</button>
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    {{ form.email }}
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Your Message</label>
+                    {{ form.message }}
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Send Message</button>
             </form>
         </div>
         

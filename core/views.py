@@ -1,26 +1,57 @@
-from django.shortcuts import render,redirect 
+from django.shortcuts import render, redirect
 from django.contrib import messages
+from .models import Category, Product
+from .forms import ContactForm
+from quotes.forms import QuoteForm
 
-
-
-# Create your views here.
 def home(request):
-    return render(request,'core/home.html',{
-        'title': 'Green Flow System - Sustainable Industrial Paper Manufacturing'
+    return render(request, 'core/home.html', {
+        'title': 'Green Core - Sustainable Industrial Paper Manufacturing'
     })
+
 def about(request):
-    return render(request,'core/about.html',{
+    return render(request, 'core/about.html', {
         'title': 'About Us - Green Core Factory Systems'
     })
+
 def contact(request):
-    return render(request,'core/contact.html',{
-        'title': 'Contact Us - Green Core Factory Systems'
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # Django built-in success message trigger
+            messages.success(request, "Your message has been sent successfully! Our sales team will get back to you shortly.")
+            return redirect('core:contact')
+    else:
+        form = ContactForm()
+    
+    return render(request, 'core/contact.html', {
+        'title': 'Contact Us - Green Core Factory Systems',
+        'form': form
     })
+
 def services(request):
-    return render(request,'core/services.html',{
-        'title': 'Our Products & Services - Green Core'
+    # Fetch all categories and active products from the SQLite database
+    categories = Category.objects.all()
+    products = Product.objects.filter(availability=True)
+    
+    return render(request, 'core/services.html', {
+        'title': 'Our Products & Services - Green Core',
+        'categories': categories,
+        'products': products
     })
+
 def request_quote(request):
-    return render(request,'core/quotes.html',{
-        'title': 'Request a Quote - Green Core'
+    if request.method == 'POST':
+        form = QuoteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Your quotation request has been submitted successfully! Check your email for details.")
+            return redirect('core:request_quote')
+    else:
+        form = QuoteForm()
+        
+    return render(request, 'quotes/request_quote.html', {
+        'title': 'Request a Quote - Green Core',
+        'form': form
     })

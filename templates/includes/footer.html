@@ -1,45 +1,47 @@
-<footer class="footer" style="background-color: var(--primary); color: #a1a1aa; padding: 60px 0 30px 0; margin-top: auto;">
-    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 40px;">
+{% load static %}
+<footer class="footer">
+    <div class="container footer-grid">
         
-        <!-- Company Info -->
-        <div>
-            <h3 style="color: white; margin-bottom: 20px;">📦 Green Core Systems</h3>
-            <p style="font-size: 0.9rem; line-height: 1.6;">Leading industrial eco-friendly paper board manufacturing. Delivering high burst factor paper sheets and rolls with digital order tracking.</p>
+        <!-- Column 1: Brand Info with Logo -->
+        <div class="footer-section">
+            <h3 class="logo">
+                <img src="{% static 'images/logo.jpg' %}" alt="Green Core Logo" class="logo-img">
+                <span>Green</span>Core
+            </h3>
+            <p>Pioneering high-grade industrial paper board manufacturing. Delivering high burst factor paper sheets and rolls with digital order tracking and eco-friendly standards.</p>
         </div>
-        
-        <!-- Quick Links -->
-        <div>
-            <h3 style="color: white; margin-bottom: 20px;">Quick Links</h3>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
-                <li><a href="{% url 'core:home' %}" style="color: #d4d4d8;">Home</a></li>
-                <li><a href="{% url 'core:about' %}" style="color: #d4d4d8;">About Us</a></li>
-                <li><a href="{% url 'core:services' %}" style="color: #d4d4d8;">Products & Services</a></li>
-                <li><a href="{% url 'core:contact' %}" style="color: #d4d4d8;">Contact</a></li>
+                <!-- Column 2: Navigation Links -->
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links-list">
+                <li><a href="{% url 'core:home' %}">Home</a></li>
+                <li><a href="{% url 'core:about' %}">About Us</a></li>
+                <li><a href="{% url 'core:services' %}">Products & Services</a></li>
+                <li><a href="{% url 'core:contact' %}">Contact</a></li>
             </ul>
         </div>
         
-        <!-- Portals -->
-        <div>
-            <h3 style="color: white; margin-bottom: 20px;">Staff & Portal</h3>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem;">
-                <li><a href="{% url 'login' %}" style="color: #d4d4d8;">Staff Login Portal</a></li>
-                <li><a href="{% url 'core:request_quote' %}" style="color: #d4d4d8;">Request Quote</a></li>
+        <!-- Column 3: Portal Links -->
+        <div class="footer-section">
+            <h3>Staff & Portal</h3>
+            <ul class="footer-links-list">
+                <li><a href="{% url 'login' %}">Staff Login Portal</a></li>
+                <li><a href="{% url 'core:request_quote' %}">Request Quote</a></li>
             </ul>
         </div>
-
-        <!-- Contact Detail -->
-        <div>
-            <h3 style="color: white; margin-bottom: 20px;">Factory Office</h3>
-            <p style="font-size: 0.9rem; line-height: 1.8;">
+                <!-- Column 4: Contact Details -->
+        <div class="footer-section">
+            <h3>Factory Office</h3>
+            <p>
                 📍 104 Industrial Area Phase 2, Delhi NCR<br>
-                📞 7665235467<br>
-                ✉️ info@greencoresystems.com
+                📞 +1 (800) 555-FLOW<br>
+                ✉️ info@greencore-paper.com
             </p>
         </div>
     </div>
     
     <!-- Copyright Bar -->
-    <div class="container" style="border-top: 1px solid #27272a; padding-top: 20px; text-align: center; font-size: 0.8rem; color: var(--text-muted);">
-        <p>&copy; 2026 Green Core  Factory Systems. All rights reserved.</p>
+    <div class="container footer-bottom">
+        <p>&copy; 2026 Green Core Factory Systems. All rights reserved.</p>
     </div>
 </footer>

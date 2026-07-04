@@ -1,61 +1,68 @@
 {% extends 'base.html' %}
 
-{% block title %}About Us - Green Core Factory Systems{% endblock %}
+{% block title %}About Us - Green Core{% endblock %}
 
 {% block content %}
-<!-- Subheader Banner -->
-<section style="background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%); color: white; padding: 60px 0; text-align: center;">
+<!-- Subheader Banner (No inline styles) -->
+<section class="sub-banner">
     <div class="container">
-        <h1 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">About Green Core Factory</h1>
-        <p style="opacity: 0.9; max-width: 600px; margin: 0 auto;">Pioneering industrial paper manufacturing and automated supply logistics for over 15 years.</p>
+        <h1>About Green Core</h1>
+        <p>Pioneering industrial paper manufacturing and automated supply logistics for over 15 years.</p>
     </div>
 </section>
 
-<!-- Company History & Key Metrics -->
+<!-- Our History & Metrics -->
 <section class="section">
-    <div class="container" style="display: grid; grid-template-columns: 2fr 1fr; gap: 50px; align-items: start;">
+    <div class="container grid-2">
+        
+        <!-- Left: Text content -->
         <div>
-            <h2 style="font-size: 2rem; margin-bottom: 20px;">Our History</h2>
-            <p style="color: var(--text-main); margin-bottom: 15px; font-size: 1rem; line-height: 1.7;">
-                Founded in 2011, Green Core Factory started as a regional recycling paper mill. Seeing the rapid growth of e-commerce packaging and the need for structural grade paper rolls with certified burst factors, we automated our slitter-winders and introduced digitized tracking systems.
-            </p>
-            <p style="color: var(--text-main); margin-bottom: 15px; font-size: 1rem; line-height: 1.7;">
-                Today, our plant processes over 120,000 metric tons of fiber annually. We serve wholesale packaging plants and pharmaceutical distributors globally, keeping all mechanical paper properties (moisture, tensile strength, and grammage) consistent through PLC-controlled sensors.
-            </p>
+            <h2>Our History</h2>
+            <p style="margin-bottom: 15px;">Founded in 2011, Green Core started as a regional recycling paper mill. Seeing the rapid growth of e-commerce packaging and the need for structural grade paper rolls with certified burst factors, we automated our slitter-winders and introduced digitized tracking systems.</p>
+            <p>Today, our plant processes over 120,000 metric tons of fiber annually. We serve wholesale packaging plants and pharmaceutical distributors globally, keeping all mechanical paper properties (moisture, tensile strength, and grammage) consistent through PLC-controlled sensors.</p>
         </div>
         
-        <!-- Factory Stats Box -->
-        <div style="background-color: white; border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 30px; box-shadow: var(--shadow-md);">
-            <h3 style="border-bottom: 2px solid var(--secondary); padding-bottom: 10px; margin-bottom: 20px; font-size: 1.2rem;">Plant Key Figures</h3>
-            <ul style="list-style: none; display: flex; flex-direction: column; gap: 20px;">
+        <!-- Right Column: Plant Metrics (Using dark container classes) -->
+        <div class="form-card">
+            <h3>Plant Key Figures</h3>
+            
+            <ul class="footer-links-list">
                 <li>
-                    <strong style="font-size: 1.5rem; color: var(--secondary); display: block; line-height: 1;">120K+ MT</strong>
-                    <span style="font-size: 0.85rem; color: var(--text-muted);">Annual Recycled Capacity</span>
+                    <h2>120K+ MT</h2>
+                    <span class="product-category">Annual Recycled Capacity</span>
                 </li>
                 <li>
-                    <strong style="font-size: 1.5rem; color: var(--secondary); display: block; line-height: 1;">2,400 mm</strong>
-                    <span style="font-size: 0.85rem; color: var(--text-muted);">Maximum Machine Deckle Width</span>
+                    <h2>2,400 mm</h2>
+                    <span class="product-category">Maximum Deckle Width</span>
                 </li>
                 <li>
-                    <strong style="font-size: 1.5rem; color: var(--secondary); display: block; line-height: 1;">15+ Years</strong>
-                    <span style="font-size: 0.85rem; color: var(--text-muted);">Industry Presence</span>
+                    <h2>15+ Years</h2>
+                    <span class="product-category">Industry Presence</span>
                 </li>
             </ul>
         </div>
+
     </div>
 </section>
 
-<!-- Mission & Vision -->
-<section class="section" style="background-color: #f4f4f5; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color);">
-    <div class="container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
-        <div style="background: white; padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border-top: 4px solid var(--secondary);">
-            <h3 style="margin-bottom: 15px; font-size: 1.3rem;">Our Mission</h3>
-            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">To supply premium, mechanical-grade paper materials using green energy and recycled pulp, ensuring durability in logistics while preserving ecosystems.</p>
+<!-- Mission & Vision Section -->
+<section class="section-alt">
+    <div class="container grid-2">
+        
+        <!-- Mission Item -->
+        <div class="info-card info-card-accent">
+            <div class="info-card-icon">🎯</div>
+            <h3>Our Mission</h3>
+            <p>To supply premium, mechanical-grade paper materials using green energy and recycled pulp, ensuring durability in logistics while preserving ecosystems.</p>
         </div>
-        <div style="background: white; padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-md); border-top: 4px solid var(--secondary);">
-            <h3 style="margin-bottom: 15px; font-size: 1.3rem;">Our Vision</h3>
-            <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.6;">To digitize industrial paper procurement globally, allowing distributors to book mill capacity, request custom deckles, and track manufacturing stages.</p>
+        
+        <!-- Vision Item -->
+        <div class="info-card info-card-accent">
+            <div class="info-card-icon">🔭</div>
+            <h3>Our Vision</h3>
+            <p>To digitize industrial paper procurement globally, allowing distributors to book mill capacity, request custom deckles, and track manufacturing stages.</p>
         </div>
+        
     </div>
 </section>
 {% endblock %}
