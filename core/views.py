@@ -1,13 +1,21 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Category, Product
 from .forms import ContactForm
 from quotes.forms import QuoteForm
 
+@login_required
 def home(request):
-    return render(request, 'core/home.html', {
-        'title': 'Green Core - Sustainable Industrial Paper Manufacturing'
-    })
+    # Force redirect to role checking view
+    return redirect('core:login_redirect')
+
+@login_required
+def login_redirect(request):
+    # Admin goes to Django Admin Panel, Staff goes to Dashboard
+    if request.user.is_superuser:
+        return redirect('/admin/')
+    return redirect('dashboard:home')
 
 def about(request):
     return render(request, 'core/about.html', {

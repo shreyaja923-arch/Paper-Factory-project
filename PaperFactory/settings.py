@@ -126,7 +126,7 @@ STATICFILES_DIRS = [
 ]
 
 # Authentication Redirects
-LOGIN_REDIRECT_URL = 'dashboard:home'
+LOGIN_REDIRECT_URL = 'core:login_redirect'
 LOGOUT_REDIRECT_URL = 'core:home'
 
 # Media Files Upload (Product images, blueprints, etc.)
