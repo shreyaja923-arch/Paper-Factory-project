@@ -13,33 +13,47 @@ GreenCore is a full-stack, secure, role-based internal web application designed 
 
 ## 🎨 User Interface Showcase
 
-### 1. Staff Login Gateway
-The landing page redirects all visitors to a secure login gateway. Django handles authentication checks and routes admins to the root control panel, and staff to the production dashboard.
-
-![Login Screen](screenshots/login.png)
-
----
-
-### 2. Main Analytics & Pipeline Dashboard
-Features interactive stats counters, quotation review tables (with instant approve/reject actions), and a live visual representation of active manufacturing orders.
-
-![Dashboard Home](screenshots/dashboard.png)
-
----
-
-### 3. Public Landing & Material Configurator
-A dark Obsidian & Mint themed interface featuring responsive layouts, and slide-in hover animations.
+### 1. Public Homepage
+Features a responsive banner displaying your eco-industrial manufacturing facilities, tagline metrics, and navigation links.
 
 ![Homepage](screenshots/homepage.png)
+
+---
+
+### 2. Products & Services Directory
+Loads paper grades, category tags, GSM weights, and deckle widths dynamically from the PostgreSQL/SQLite database.
+
+![Products Catalog](screenshots/services.png)
+
+---
+
+### 3. Quotation Request Portal
+Allows packaging companies to submit material requirements, tonnage volume, and delivery specs directly to the production queue.
+
+![Quotation Request](screenshots/quotes.png)
+
+---
+
+### 4. Staff Analytics & Production Dashboard
+Provides staff with pipeline metrics, database-backed Chart.js visualizations, quote approval tables, and active order stages tracker.
+
+![Dashboard](screenshots/dashboard.png)
+
+---
+
+### 5. Staff Login Portal
+Secure auth gate allowing staff to authenticate and automatically route based on their access permissions.
+
+![Login Screen](screenshots/login.png)
 
 ---
 
 ## 🚀 Key Features
 
 * **🔐 Role-Based Access Control**:
-  * Any unauthenticated user visiting the root URL `/` is automatically redirected to `/accounts/login/`.
-  * **Superusers (Admins)** are redirected straight to the Django `/admin/` workspace.
-  * **Staff Members** are redirected to the `/dashboard/` workflow workspace.
+  * Public homepage `/` is open to all visitors, allowing them to browse products and request quotes.
+  * **Superusers (Admins)** logging in are automatically routed to the Django `/admin/` workspace.
+  * **Staff Members** logging in are automatically routed to the `/dashboard/` workspace.
 * **⚙️ Active Order Pipeline State Machine**:
   * Allows staff to advance orders sequentially: `Received ➔ Production ➔ Dispatched ➔ Delivered`.
   * Generates shipping tracking numbers automatically upon dispatch.
