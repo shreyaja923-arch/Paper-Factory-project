@@ -5,10 +5,10 @@ from .models import Category, Product
 from .forms import ContactForm
 from quotes.forms import QuoteForm
 
-@login_required
 def home(request):
-    # Force redirect to role checking view
-    return redirect('core:login_redirect')
+    return render(request, 'core/home.html', {
+        'title': 'Green Core - Sustainable Industrial Paper Manufacturing'
+    })
 
 @login_required
 def login_redirect(request):

@@ -5,6 +5,8 @@
 [![Render Hosting](https://img.shields.io/badge/Hosted_on-Render-4640FF?style=for-the-badge&logo=render)](https://render.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
+🔗 **Live Website**: [https://paper-factory-project.onrender.com/](https://paper-factory-project.onrender.com/)
+
 GreenCore is a full-stack, secure, role-based internal web application designed for industrial paper manufacturing factories. It digitizes paper product directories, validates and tracks client quotation inquiries, and provides staff members with a real-time production pipeline tracking board and analytical charts.
 
 ---
